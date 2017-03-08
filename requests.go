@@ -32,8 +32,14 @@ type ColorRequest struct {
 	Files []string `json:"files,omitempty"`
 }
 
+// GetFiles returns the files on the request.
 func (c ColorRequest) GetFiles() []string {
 	return c.Files
+}
+
+// GetModel returns the model for the request.
+func (c ColorRequest) GetModel() string {
+	return ""
 }
 
 // ColorResp represents the expected JSON response from /color/
@@ -72,8 +78,14 @@ type TagRequest struct {
 	Model    string   `json:"model,omitempty"`
 }
 
+// GetFiles returns the files on the request.
 func (t TagRequest) GetFiles() []string {
 	return t.Files
+}
+
+// GetModel returns the model for the request.
+func (t TagRequest) GetModel() string {
+	return t.Model
 }
 
 // TagResp represents the expected JSON response from /tag/
@@ -126,6 +138,7 @@ type FeedbackResp struct {
 
 type hasFiles interface {
 	GetFiles() []string
+	GetModel() string
 }
 
 // Info will return the current status info for the given client

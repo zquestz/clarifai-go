@@ -169,9 +169,16 @@ func (client *Client) fileHTTPRequest(jsonBody hasFiles, endpoint string, retry 
 	}
 
 	err := writer.WriteField("op", endpoint)
-
 	if err != nil {
 		return nil, err
+	}
+
+	if jsonBody.GetModel() != "" {
+		err := writer.WriteField("model", jsonBody.GetModel())
+		if err != nil {
+			return nil, err
+		}
+
 	}
 
 	req, err := http.NewRequest("POST", client.buildURL(endpoint), body)
